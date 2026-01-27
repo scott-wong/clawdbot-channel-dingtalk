@@ -17,6 +17,7 @@
   },
   "clawdbot": {
     "extensions": ["./plugin.ts"],
+    "channels": ["dingtalk"],
     "channel": {
       "id": "dingtalk",
       "label": "DingTalk",
