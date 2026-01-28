@@ -40,7 +40,7 @@ clawdbot plugins install -l .
 ### 方法 C：手动安装
 
 1. 将本目录下载或复制到 `~/.clawdbot/extensions/dingtalk`。
-2. 确保包含 `plugin.ts`, `clawdbot.plugin.json` 和 `package.json`。
+2. 确保包含 `index.ts`, `clawdbot.plugin.json` 和 `package.json`。
 3. 运行 `clawdbot plugins list` 确认 `dingtalk` 已显示在列表中。
 
 ## 配置
@@ -56,6 +56,7 @@ clawdbot plugins install -l .
 ### 2. 获取凭证
 
 从开发者后台获取：
+
 - **Client ID** (AppKey)
 - **Client Secret** (AppSecret)
 - **Robot Code** (与 Client ID 相同)
@@ -71,16 +72,16 @@ clawdbot plugins install -l .
   channels: {
     dingtalk: {
       enabled: true,
-      clientId: "dingxxxxxx",
-      clientSecret: "your-app-secret",
-      robotCode: "dingxxxxxx",
-      corpId: "dingxxxxxx",
-      agentId: "123456789",
-      dmPolicy: "open",      // open | pairing | allowlist
-      groupPolicy: "open",   // open | allowlist
-      debug: false
-    }
-  }
+      clientId: 'dingxxxxxx',
+      clientSecret: 'your-app-secret',
+      robotCode: 'dingxxxxxx',
+      corpId: 'dingxxxxxx',
+      agentId: '123456789',
+      dmPolicy: 'open', // open | pairing | allowlist
+      groupPolicy: 'open', // open | allowlist
+      debug: false,
+    },
+  },
 }
 ```
 
@@ -92,18 +93,18 @@ clawdbot gateway restart
 
 ## 配置选项
 
-| 选项 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `enabled` | boolean | `true` | 是否启用 |
-| `clientId` | string | 必填 | 应用的 AppKey |
-| `clientSecret` | string | 必填 | 应用的 AppSecret |
-| `robotCode` | string | - | 机器人代码（用于下载媒体） |
-| `corpId` | string | - | 企业 ID |
-| `agentId` | string | - | 应用 ID |
-| `dmPolicy` | string | `"open"` | 私聊策略：open/pairing/allowlist |
-| `groupPolicy` | string | `"open"` | 群聊策略：open/allowlist |
-| `allowFrom` | string[] | `[]` | 允许的发送者 ID 列表 |
-| `debug` | boolean | `false` | 是否开启调试日志 |
+| 选项           | 类型     | 默认值   | 说明                             |
+| -------------- | -------- | -------- | -------------------------------- |
+| `enabled`      | boolean  | `true`   | 是否启用                         |
+| `clientId`     | string   | 必填     | 应用的 AppKey                    |
+| `clientSecret` | string   | 必填     | 应用的 AppSecret                 |
+| `robotCode`    | string   | -        | 机器人代码（用于下载媒体）       |
+| `corpId`       | string   | -        | 企业 ID                          |
+| `agentId`      | string   | -        | 应用 ID                          |
+| `dmPolicy`     | string   | `"open"` | 私聊策略：open/pairing/allowlist |
+| `groupPolicy`  | string   | `"open"` | 群聊策略：open/allowlist         |
+| `allowFrom`    | string[] | `[]`     | 允许的发送者 ID 列表             |
+| `debug`        | boolean  | `false`  | 是否开启调试日志                 |
 
 ## 安全策略
 
@@ -122,23 +123,23 @@ clawdbot gateway restart
 
 ### 接收
 
-| 类型 | 支持 | 说明 |
-|------|------|------|
-| 文本 | ✅ | 完整支持 |
-| 富文本 | ✅ | 提取文本内容 |
-| 图片 | ✅ | 下载并传递给 AI |
-| 语音 | ✅ | 使用钉钉语音识别结果 |
-| 视频 | ✅ | 下载并传递给 AI |
-| 文件 | ✅ | 下载并传递给 AI |
+| 类型   | 支持 | 说明                 |
+| ------ | ---- | -------------------- |
+| 文本   | ✅   | 完整支持             |
+| 富文本 | ✅   | 提取文本内容         |
+| 图片   | ✅   | 下载并传递给 AI      |
+| 语音   | ✅   | 使用钉钉语音识别结果 |
+| 视频   | ✅   | 下载并传递给 AI      |
+| 文件   | ✅   | 下载并传递给 AI      |
 
 ### 发送
 
-| 类型 | 支持 | 说明 |
-|------|------|------|
-| 文本 | ✅ | 完整支持 |
-| Markdown | ✅ | 自动检测或手动指定 |
-| 图片 | ⏳ | 需要通过媒体上传 API |
-| 交互卡片 | ⏳ | 计划中 |
+| 类型     | 支持 | 说明                 |
+| -------- | ---- | -------------------- |
+| 文本     | ✅   | 完整支持             |
+| Markdown | ✅   | 自动检测或手动指定   |
+| 图片     | ⏳   | 需要通过媒体上传 API |
+| 交互卡片 | ⏳   | 计划中               |
 
 ## 使用示例
 
@@ -166,16 +167,84 @@ clawdbot gateway restart
 1. 检查 clientId 和 clientSecret 是否正确
 2. 确认网络可以访问钉钉 API
 
-## 开发
+## 开发指南
+
+### 首次设置
+
+1. 克隆仓库并安装依赖
 
 ```bash
-# 运行测试
-cd ~/clawd/extensions/dingtalk-channel
-node test.js
-
-# 查看日志
-clawdbot logs | grep dingtalk
+git clone https://github.com/soimy/clawdbot-channel-dingtalk.git
+cd clawdbot-channel-dingtalk
+npm install
 ```
+
+2. 验证开发环境
+
+```bash
+npm run type-check              # TypeScript 类型检查
+npm run lint                    # ESLint 代码检查
+```
+
+### 常用命令
+
+| 命令                 | 说明                |
+| -------------------- | ------------------- |
+| `npm run type-check` | TypeScript 类型检查 |
+| `npm run lint`       | ESLint 代码检查     |
+| `npm run lint:fix`   | 自动修复格式问题    |
+
+### 项目结构
+
+```
+src/
+  channel.ts           - 插件定义和辅助函数（535 行）
+  runtime.ts           - 运行时管理（14 行）
+  types.ts             - 类型定义（30+ interfaces）
+
+index.ts              - 插件注册（29 行）
+utils.ts              - 工具函数（110 行）
+
+clawdbot.plugin.json  - 插件配置
+package.json          - 项目配置
+README.md             - 本文件
+```
+
+### 代码质量
+
+- **TypeScript**: 严格模式，0 错误
+- **ESLint**: 自动检查和修复
+- **Type Safety**: 完整的类型注解（30+ 接口）
+
+### 类型系统
+
+核心类型定义在 `src/types.ts` 中，包括：
+
+```typescript
+// 配置
+DingTalkConfig; // 插件配置
+DingTalkChannelConfig; // 多账户配置
+
+// 消息处理
+DingTalkInboundMessage; // 收到的钉钉消息
+MessageContent; // 解析后的消息内容
+HandleDingTalkMessageParams; // 消息处理参数
+
+// 工具函数类型
+Logger; // 日志接口
+RetryOptions; // 重试选项
+MediaFile; // 下载的媒体文件
+```
+
+### 架构
+
+插件遵循 Telegram 参考实现的架构模式：
+
+- **index.ts**: 最小化插件注册入口
+- **src/channel.ts**: 所有 DingTalk 特定的逻辑（API、消息处理、配置等）
+- **src/runtime.ts**: 运行时管理（getter/setter）
+- **src/types.ts**: 类型定义
+- **utils.ts**: 通用工具函数
 
 ## 许可
 
