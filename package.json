@@ -1,7 +1,7 @@
 {
-  "name": "@clawdbot/dingtalk",
+  "name": "@openclaw/dingtalk",
   "version": "2.0.0",
-  "description": "DingTalk (钉钉) channel plugin for Clawdbot",
+  "description": "DingTalk (钉钉) channel plugin for openclaw",
   "main": "index.ts",
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
     "lint:fix": "eslint --fix index.ts src/ && prettier --write index.ts src/"
   },
   "keywords": [
-    "clawdbot",
+    "openclaw",
     "dingtalk",
     "channel",
     "stream",
@@ -26,13 +26,13 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "clawdbot": "^2026.1.24-3",
+    "openclaw": "^2026.1.24-3",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.0",
     "typescript": "^5.3.0"
   },
-  "clawdbot": {
+  "openclaw": {
     "extensions": [
       "./index.ts"
     ],
@@ -54,7 +54,7 @@
       ]
     },
     "install": {
-      "npmSpec": "@clawdbot/dingtalk",
+      "npmSpec": "@openclaw/dingtalk",
       "localPath": "extensions/dingtalk-channel",
       "defaultChoice": "local"
     }
